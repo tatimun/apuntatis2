@@ -74,6 +74,8 @@ jobs:
           jekyll: false
           dry_run: false
           verbose: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
