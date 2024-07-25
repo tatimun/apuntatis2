@@ -13,8 +13,8 @@ published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
-emoji = "🍥"
-subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+emoji = "👾"
+subtitle = "Ensusiasta del mundo DevOps, documentando ✨"
 
 [sidebar.avatar]
 enabled = true
@@ -32,10 +32,10 @@ default = "Licensed under CC BY-NC-SA 4.0"
 
 ## Widgets
 [[widgets.homepage]]
-type = "search"
+type = "Buscar"
 
 [[widgets.homepage]]
-type = "archives"
+type = "archivos"
 
 [widgets.homepage.params]
 limit = 5
