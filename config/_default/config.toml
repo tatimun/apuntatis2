@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://tatimun.github.com/tatisnote"
+baseurl = "https://tatimun.github.com/Tatisnote"
 languageCode = "en-us"
 paginate = 5
 title = "Tatis Note"
