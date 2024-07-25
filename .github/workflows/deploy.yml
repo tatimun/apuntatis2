@@ -64,18 +64,9 @@ jobs:
           name: github-pages
           path: public/
 
-      - name: Crazy Deploy
-        uses: crazy-max/ghaction-github-pages@v4.0.0
-        with:
-          target_branch: gh-pages
-          build_dir: public
-          keep_history: false
-          allow_empty_commit: true
-          jekyll: false
-          dry_run: false
-          verbose: true
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+
 
 
 
