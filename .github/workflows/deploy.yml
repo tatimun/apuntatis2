@@ -11,8 +11,6 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
-            # Give the default GITHUB_TOKEN write permission to commit and push the
-            # added or changed files to the repository.
             contents: write
 
         steps:
@@ -26,7 +24,7 @@ jobs:
                   cache-name: cache-hugo-resources
               with:
                   path: resources
-                  key: ${{ env.cache-name }}
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/go.sum') }}
 
             - uses: actions/setup-go@v5
               with:
@@ -39,23 +37,20 @@ jobs:
                   hugo-version: "latest"
                   extended: true
 
+            - name: Build
+              run: hugo --minify --gc
+
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v1
               with:
                   name: github-pages
                   path: public/
 
-            - name: Build
-              run: hugo --minify --gc
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build
 
-            - name: Deploy 🚀
-              uses: JamesIves/github-pages-deploy-action@v4
-              with:
-                  branch: gh-pages
-                  folder: public
-                  clean: true
-                  single-commit: true
-
+        steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
