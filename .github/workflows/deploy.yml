@@ -39,6 +39,12 @@ jobs:
                   hugo-version: "latest"
                   extended: true
 
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  name: github-pages
+                  path: public/
+
             - name: Build
               run: hugo --minify --gc
 
@@ -49,3 +55,15 @@ jobs:
                   folder: public
                   clean: true
                   single-commit: true
+
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Download artifact
+              uses: actions/download-artifact@v3
+              with:
+                  name: github-pages
+                  path: public/
+
+            - name: Deploy to GitHub Pages
+              uses: actions/deploy-pages@v1
