@@ -3,7 +3,6 @@ title: Vagrant
 description: Aprendiendo vagrant
 slug: vagrant
 date: 2024-07-29
-image: cover.jpg
 categories:
   - Vagrant
   - Hashicorp
