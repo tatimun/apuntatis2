@@ -1,17 +1,21 @@
 ---
-title: Hello World
-description: Welcome to Hugo Theme Stack
-slug: hello-world
-date: 2022-03-06 00:00:00+0000
+title: Vagrant
+description: Aprendiendo vagrant
+slug: vagrant
+date: 2024-07-29
 image: cover.jpg
 categories:
-  - Example Category
+  - Vagrant
+  - Hashicorp
+  - DevOps
 tags:
-  - Example
-  - Tag
+  - Vagrant
+  - Hashicorp
+  - DevOps
 weight: 1
 dg-publish: true
 ---
 
 
-Este es un cambio test
+# Vagrant
+
