@@ -20,6 +20,20 @@ sudo yum install ansible
 ansible --version
 ~~~
 ### Comandos
+Nos genera un archivo en /etc/ansible/hosts que contendra los servers a los cuales nos conectaremos
 
+~~~
+# Pinguea hacia los hosts en este archivo
+ansible all -m ping
+
+# Lista los hosts conectados
+ansible all --list-hosts
+
+
+~~~
 ### ¿Como funciona?
+
+
+
+ 
 
