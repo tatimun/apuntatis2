@@ -1,10 +1,9 @@
 ---
-title: Example Category
-description: A description of this category
-image:
-
-# Badge style
+title: Proyecto
+description: Proyectos realizados o en proceso
+image: 
 style:
-    background: "#2a9d8f"
-    color: "#fff"
+  background: "#2a9d8f"
+  color: "#fff"
+dg-publish: true
 ---

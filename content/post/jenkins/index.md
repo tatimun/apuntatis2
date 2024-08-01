@@ -1,7 +1,7 @@
 ---
 title: Jenkins
 description: Aprendiendo Jenkins
-date: 2023-08-24 00:00:00+0000
+date: 2024-06-24 00:00:00+0000
 math: false
 categories:
   - CICD

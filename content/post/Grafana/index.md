@@ -1,6 +1,6 @@
 ---
 title: Grafana
-date: 2023-09-07
+date: 2024-09-07
 description: Aprendiendo Grafana
 tags:
   - Monitoreo
