@@ -6,6 +6,7 @@ tags:
   - Automatizacion
 categories:
   - Automatizacion
+  - Ansible
 dg-publish: true
 draft: "false"
 image: banner.jpg
