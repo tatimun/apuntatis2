@@ -9,4 +9,5 @@ tags:
 categories:
   - Monitoreo
 dg-publish: true
+draft: "true"
 ---

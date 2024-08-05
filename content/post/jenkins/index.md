@@ -7,4 +7,5 @@ categories:
   - CICD
 tags:
   - CICD
+draft: "true"
 ---
