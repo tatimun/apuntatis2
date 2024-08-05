@@ -1,6 +1,6 @@
 ---
 title: Azure Batch
-date: 2024-08-3
+date: 2024-08-04
 description: Que es y como utilizarlo
 tags:
   - Azure
