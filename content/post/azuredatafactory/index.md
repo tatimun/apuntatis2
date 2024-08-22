@@ -8,6 +8,7 @@ tags:
 categories:
   - Azure
   - Cloud
+  - AzureDevOps
 dg-publish: true
 draft: "false"
 ---
@@ -25,7 +26,7 @@ Data Factory seria el servicio de logistica que coordina y automatiza este trans
 En realidad, no es necesario. Pero, si brinda un esquema mas automatizado y permite no dar permisos de mas. 🤔 ¿A que se debe? 🤔
 
 Bueno, para eso deberiamos ver como era el flujo anteriormente presentado.
-
+### Flujo Tradicional 
 [INSERTAR IMAGEN DE FLUJO ACTUAL]
 
 En el flujo actual, el desarollador entra al ambiente de Data Factory y realiza los cambios que quiere, valida y realiza un Publish que se va a deployar automagicamente.
@@ -33,6 +34,7 @@ En el flujo actual, el desarollador entra al ambiente de Data Factory y realiza 
 Esto requiere que el usuario que realice el Publish tenga permisos sobre los recursos en los cuales va a realizar cambios (Si los cambios del data factory estan conectados contra un azure storage, es necesario tener permisos sobre el Storage)
 
 PERO EN EL NUEVO FLUJO... 🎉
+### Nuevo flujo 
 
 [INSERTAR IMAGEN DEL NUEVO FLUJO]
 
