@@ -12,3 +12,12 @@ categories:
 dg-publish: true
 draft: "false"
 ---
+
+## Que es Databricks
+
+Para empezar, Databricks es una herramienta de analisis de datos que en pocas palabras te permite crear clusters rapidamente para analizar, y procesar grandes cantidades de datos y soporta Python, R, Scala etc.
+
+## Por que deberiamos conectarlo contra Azure Devops?
+
+
+## Proyecto: Conexion
