@@ -13,6 +13,7 @@ categories:
 dg-publish: true
 draft: "false"
 weight: 2
+image: banner.png
 ---
 
 ## Que es Databricks

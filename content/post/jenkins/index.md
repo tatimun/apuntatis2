@@ -8,6 +8,7 @@ categories:
 tags:
   - Jenkins
 draft: "false"
+image: banner.png
 ---
 
 ## Instalacion de Jenkins Agent en Windows
