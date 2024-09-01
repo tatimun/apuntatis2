@@ -44,7 +44,7 @@ BUILD: Chequea la version de node, verifica los recursos en el Data Factory y ge
 
 DEPLOY: Agarra lo que hay en tu pull request y compara con el ARM Template de lo que tenes actualmente, y hace los cambios para quedar acorde a la plantilla de los cambios. Agrega lo necesario y elimina lo que no esta 
 
-# Laboratorio: Creacion de Conexion
+## Laboratorio: Creacion de Conexion
 
 Requisitos:
 - App registration
