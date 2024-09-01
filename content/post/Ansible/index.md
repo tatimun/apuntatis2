@@ -8,7 +8,7 @@ categories:
   - Automatizacion
   - Ansible
 dg-publish: true
-draft: "false"
+draft: "true"
 image: banner.jpg
 ---
 ### ¿Qué es Ansible?

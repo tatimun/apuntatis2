@@ -7,10 +7,12 @@ tags:
   - Data Factory
 categories:
   - Azure
-  - Cloud
   - AzureDevOps
+  - Proyecto
 dg-publish: true
 draft: "false"
+image: newflow.png
+weight: 1
 ---
 
 # ¿Qué es Data Factory?
@@ -199,7 +201,7 @@ steps:
 
 Le daremos click en guardar y crear release, luego haremos deploy y ya verificamos los cambios en ADF
 
-
+## Video Laboratorio
 
 Para mas informacion, dejo el video del laboratorio realizado para esta conexion:
 

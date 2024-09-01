@@ -8,7 +8,7 @@ categories:
   - DevOpsPath
   - Ansible
 dg-publish: true
-draft: "false"
+draft: "true"
 ---
 
 ¿Que es DevOps?

@@ -9,7 +9,7 @@ categories:
   - Azure
   - Cloud
 dg-publish: true
-draft: "false"
+draft: "true"
 image: banner.jpg
 ---
 ## <mark style="background: #FFB8EBA6;">¿Que es?</mark> 💭
