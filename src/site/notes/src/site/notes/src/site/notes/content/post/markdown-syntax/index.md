@@ -1,6 +1,7 @@
 ---
-{"dg-publish":true,"permalink":"/content/post/markdown-syntax/index/","title":"Markdown Syntax Guide","tags":["markdown","css","html","themes"]}
+{"dg-publish":true,"permalink":"/src/site/notes/src/site/notes/content/post/markdown-syntax/index/","title":"Markdown Syntax Guide","tags":["markdown","css","html","themes"]}
 ---
+
 
 ---
 title: Markdown Syntax Guide
