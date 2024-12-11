@@ -18,17 +18,10 @@ image: banner.png
 
 
 
-## Por que deberiamos conectarlo contra Azure Devops?
-
-
-
-
-Si quisieramos pasar de ambientes automaticamente, sin dejar asociado ningun nombre de un usuario como owner de los archivos, deberiamos realizar la conexion contra Azure DevOps.
-
 ### Requisitos:
 
 - Databricks Instance
-- Service Principal
+- Service Principal/App registration (Con un secret value)
 - Self Hosted or Azure Hosted
 
 
@@ -44,16 +37,6 @@ En este proceso vamos a tener que utilizar varios tokens para poder hacer un "Up
 
 
 
-Primero haremos login con nuestra app registration, como ven, requiere tener un secret value:
-
-~~~YAML
- az login --service-principal -u $(client_id) -p $(client_pass) --tenant $(AZURE-TENANT-ID)
- ~~~
-
- Luego obtendremos varios tokens:
- - AD Token: Del Azure Portal
- - ADO Token: De AzureDevOps (Mejor conocido como PAT o Personal Access Token)
- - Databricks Token: Necesario para poder interactuar con la API de Databricks
 
 
 ## Permisos 
@@ -70,10 +53,6 @@ Primero haremos login con nuestra app registration, como ven, requiere tener un 
 A continuacion va el pipeline que estuve utilizando para realizar pruebas: 
 
 ~~~YAML
--# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
 trigger:
 - main
@@ -90,18 +69,14 @@ steps:
    python3 -m pip install --upgrade pip
    python3 -m pip install msal
    python3 -m pip install databricks_cli
-  displayName: '2. Install modules Python'
+  displayName: '1. Install modules Python'
 
-#We need to login as the service principal in order to obtain the token for the required services
+
 - bash: |
     az login --service-principal -u $(AUTH_CLIENT_ID) -p $(AUTH_CLIENT_PASS) --tenant $(AUTH_AZURE_TENANT_ID)
-  displayName: '3. Az Login as service principal'
+  displayName: '2. Az Login as service principal'
 
-##-----------------------------------------------------------------------------------------##
-##-----------------------------------------------------------------------------------------##
-##-----------------------------------------------------------------------------------------##
 
-#In this step, we obtain the token for AAD 
 - bash: |
    response_aad=$(curl --location --request POST 'https://login.microsoftonline.com/$(AUTH_AZURE_TENANT_ID)/oauth2/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -116,9 +91,9 @@ steps:
    #This command is to pass variables through the pipeline in different stages 
    echo "##vso[task.setvariable variable=access_token]$access_token"
     
-  displayName: '4. Get-AAD-Token '
+  displayName: '3. Get-AAD-Token '
 
-#Step to obtain Databricks token
+
 - bash: |
    LOGIN_URL="https://login.microsoftonline.com/$(AUTH_AZURE_TENANT_ID)/oauth2/v2.0/token"
    
@@ -133,7 +108,7 @@ steps:
    token_data=$(echo "$response_data2" | jq -r '.access_token')
    
    echo "##vso[task.setvariable variable=token_data]$token_data"
-  displayName: '5. Token_Data'
+  displayName: '4. Token_Data'
 
 #Step to obtain Azure DevOps token (PAT, personal access token)
 - bash: |
@@ -153,9 +128,9 @@ steps:
    
 
    echo "##vso[task.setvariable variable=token_ado]$token_ado"
-  displayName: '6. Token_ADO PAT'
+  displayName: '5. Token_ADO PAT'
 
-######################################################################😄######################################################################
+
 ######################################################################
 ######################################################################
 ######################################################################
@@ -183,7 +158,7 @@ steps:
           "git_provider": "azureDevOpsServices",
           "git_username": "databricks-app2"
       }'
-  displayName: '6.1. Create Git Credential'
+  displayName: '6. Create Git Credential'
 
 
 - task: Bash@3
@@ -197,7 +172,7 @@ steps:
           "git_provider": "azureDevOpsServices",
           "git_username": "databricks-app2"
       }'
-  displayName: '6.1. Get Git Credential'
+  displayName: '7. Get Git Credential'
 
 
 - bash: |
@@ -220,13 +195,13 @@ steps:
 
    HEADERS=(-H "Authorization: Bearer ${TOKEN_DATA}" -H "Content-Type: application/json")
    curl -v "${HEADERS[@]}" -X GET "${AUTH_DATABRICKS_HOST}/api/2.0/permissions/repos/REPO_ID" 
-  displayName: 'Get Repo Permissions'
+  displayName: '9. Get Repo Permissions'
 
 - bash: |
 
    HEADERS=(-H "Authorization: Bearer ${TOKEN_DATA}" -H "Content-Type: application/json")
    curl -v "${HEADERS[@]}" -X GET "${AUTH_DATABRICKS_HOST}/api/2.0/permissions/repos/REPO_ID/permissionLevels" 
-  displayName: 'Get Repo Permissions'
+  displayName: '9. Get Repo Permissions Levels'
 
 
 - bash: |
@@ -248,7 +223,7 @@ steps:
      "url": "https://dev.azure.com/ORG/_git/REPO"
    }' )
    echo "$response_update"
-  displayName: '8. Create Repo'
+  displayName: '10. Create Repo'
 
 
 - bash: |
@@ -262,29 +237,20 @@ steps:
      "branch": "Databricks_OriginalPipe"
    }' )
    echo "$response_update"
-  displayName: '8. Update Repo'
+  displayName: '11. Update Repo'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      HEADERS=(-H "Authorization: Bearer ${TOKEN_DATA}" -H "Content-Type: application/json")
-      URL="${AUTH_DATABRICKS_HOST}/api/2.0/repos/{ID}"
-      
-      curl --location --request GET "$URL" \
-      --header "Authorization: Bearer $TOKEN_DATA" \
-      --header "Content-Type: application/json"
 ~~~
 
-
+💎💎💎💎💎💎💎💎💎
 Mis variables utilizadas como grupo:
 - AUTH_AZURE_TENANT_ID
 - AUTH_CLIENT_ID
 - AUTH_CLIENT_PASS
 - AUTH_DATABRICKS_HOST
 
+💎💎💎💎💎💎💎💎💎
 
-## Explicacion del pipeline:
+## Explicacion del pipeline: ✨
 
 1. Primero me logueo en nombre de las app registration
 2. Obtengo 3 tokens:
@@ -294,10 +260,11 @@ Mis variables utilizadas como grupo:
 
 3. Estos tokens van a ir en diferentes requests ya que el pipeline le pega a las diferentes API's
    
-  ### Databricks 
+  
+ ----- (Parte de databricks😁)-----
 
-4. Databricks pide generar una git credential por usuario, se genera una unica vez y luego se actualiza en base a que repositorio vas a utilizar **(6.1. Create Git Credential)**
-5. Obtengo el ID de la credencial para poder actualizarla **(6.1. Get Git Credential)**
+4. Databricks pide generar una git credential por usuario, se genera una unica vez y luego se actualiza en base a que repositorio vas a utilizar **(6. Create Git Credential)**
+5. Obtengo el ID de la credencial para poder actualizarla **(7. Get Git Credential)**
 6. Updateo la credencial usando esa ID **(8. UpdateGitCredential)**
 
 Una vez hecho esto, podrias hacer un GET de **HOST-DATABRICKS/api/2.0/repos** para ver que repositorios estan creados
@@ -305,7 +272,7 @@ Una vez hecho esto, podrias hacer un GET de **HOST-DATABRICKS/api/2.0/repos** pa
 8. Create repo, genere un repositorio en la ruta que indique
 9. Update repo, unicamente pide el nombre de la branch que se va a copiar dentro de databricks
 
-# Logs
+## Logs ⚠
 
 Create Git Credential:
 ![alt text](image-3.png)

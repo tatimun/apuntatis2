@@ -21,6 +21,10 @@ links:
     description: Para practicar diferentes herramientas en maquinas que te proporcionan ✨
     website: https://killercoda.com/
     image: https://cdn-1.webcatalog.io/catalog/killercoda/killercoda-social-preview.png?v=1714777917977
+  - title: Codigo Facilito
+    description: Tiene varios cursos de DevOps, Cloud y Programming
+    website: https://www.codigofacilito.com
+    image: https://play-lh.googleusercontent.com/VyV8Zp6p_UNT1GQaAthe3Ec_5_m03OhjNBZGvthRxcesnrmkXck3CwTfS7PjRqZh0_0
 menu:
   main:
     weight: 4
